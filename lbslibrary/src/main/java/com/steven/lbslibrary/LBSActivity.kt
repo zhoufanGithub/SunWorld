@@ -112,6 +112,10 @@ class LBSActivity : AppCompatActivity(), BDLocationListener {
         locationClient!!.locOption = option
     }
 
+    private fun jiji(){
+
+    }
+
     override fun onReceiveLocation(location: BDLocation?) {
         val currentPosition = StringBuilder()
         currentPosition.append("纬度：").append(location!!.latitude).append("\n")
