@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/icon_one"
+        android:icon="@drawable/item"
+        android:title="目录"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/icon_two"
+        android:icon="@drawable/share"
+        android:title="分享"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/icon_three"
+        android:icon="@drawable/setting"
+        android:title="设置"
+        app:showAsAction="never" />
+
+</menu>

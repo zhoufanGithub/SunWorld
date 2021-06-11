@@ -17,7 +17,7 @@
         tools:ignore="ProtectedPermissions" />
 
     <application>
-        <activity android:name=".LBSActivity"></activity>
+        <activity android:name=".LBSActivity"/>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
