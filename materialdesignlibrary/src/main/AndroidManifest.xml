@@ -3,6 +3,8 @@
     package="com.steven.materialdesignlibrary">
 
     <application>
+        <activity android:name=".FruitActivity"
+            android:theme="@style/FruitActivityTheme"/>
         <activity
             android:name=".MaterialDesignerActivity"
             android:label="Fruits" />
