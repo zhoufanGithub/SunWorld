@@ -12,6 +12,12 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
+    // 兼容Java 8.0的特性
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
