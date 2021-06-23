@@ -2,14 +2,12 @@ package com.steven.sunworld
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.steven.lbslibrary.LBSActivity
 import com.steven.materialdesignlibrary.MaterialDesignerActivity
 
 class MainActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

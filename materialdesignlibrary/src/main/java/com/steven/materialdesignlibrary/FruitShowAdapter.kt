@@ -42,7 +42,7 @@ private class FruitShowAdapter(private val mFruitList: List<Fruit>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val fruit = mFruitList[position]
         holder.fruitName.text = fruit.name
-        Glide.with(mContext).load(fruit.imageId).into(holder.fruitImage)
+        Glide.with(mContext!!).load(fruit.imageId).into(holder.fruitImage)
     }
 
     override fun getItemCount(): Int {
