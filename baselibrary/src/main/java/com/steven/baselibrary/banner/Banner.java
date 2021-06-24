@@ -49,7 +49,31 @@ import java.util.List;
 
 import static java.lang.annotation.RetentionPolicy.SOURCE;
 
-
+/**
+ * 属性含义
+ banner_loop_time 	integer 	轮播间隔时间，默认3000
+ banner_auto_loop 	boolean 	是否自动轮播，默认true
+ banner_infinite_loop 	boolean 	是否支持无限循环（即首尾直接过渡），默认true
+ banner_orientation 	enum 	轮播方向：horizontal（默认） or vertical
+ banner_radius 	dimension 	banner圆角半径，默认0（不绘制圆角）
+ banner_indicator_normal_width 	dimension 	指示器默认的宽度，默认5dp （对RoundLinesIndicator无效）
+ banner_indicator_selected_width 	dimension 	指示器选中的宽度，默认7dp
+ banner_indicator_normal_color 	color 	指示器默认颜色，默认0x88ffffff
+ banner_indicator_selected_color 	color 	指示器选中颜色，默认0x88000000
+ banner_indicator_space 	dimension 	指示器之间的间距，默认5dp （对RoundLinesIndicator无效）
+ banner_indicator_gravity 	dimension 	指示器位置，默认center
+ banner_indicator_margin 	dimension 	指示器的margin,默认5dp，不能和下面的同时使用
+ banner_indicator_marginLeft 	dimension 	指示器左边的margin
+ banner_indicator_marginTop 	dimension 	指示器上边的margin
+ banner_indicator_marginRight 	dimension 	指示器右边的margin
+ banner_indicator_marginBottom 	dimension 	指示器下边的margin
+ banner_indicator_height 	dimension 	指示器高度（对CircleIndicator无效）
+ banner_indicator_radius 	dimension 	指示器圆角（对CircleIndicator无效）
+ banner_round_top_left 	boolean 	设置要绘制的banner圆角方向（如果都不设置默认全部）
+ banner_round_top_right 	boolean 	设置要绘制的banner圆角方向（如果都不设置默认全部）
+ banner_round_bottom_left 	boolean 	设置要绘制的banner圆角方向（如果都不设置默认全部）
+ banner_round_bottom_right 	boolean 	设置要绘制的banner圆角方向（如果都不设置默认全部）
+ */
 public class Banner<T, BA extends BannerAdapter<T, ? extends RecyclerView.ViewHolder>> extends FrameLayout implements BannerLifecycleObserver {
     public static final int INVALID_VALUE = -1;
     private ViewPager2 mViewPager2;
