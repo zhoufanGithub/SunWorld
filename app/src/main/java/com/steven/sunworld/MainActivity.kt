@@ -2,12 +2,8 @@ package com.steven.sunworld
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.steven.baselibrary.dialog.popupwindow.PopupWindowManager
 import com.steven.lbslibrary.LBSActivity
 import com.steven.materialdesignlibrary.MaterialDesignerActivity
 

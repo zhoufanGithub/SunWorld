@@ -48,4 +48,13 @@
         <attr name="normal_drawable" format="reference"/>
         <attr name="selected_drawable" format="reference"/>
     </declare-styleable>
+
+    <!-- 计步器的自定义样式 -->
+    <declare-styleable name="StepView">
+        <attr name="step_view_fix_progress_color" format="color"/>
+        <attr name="step_view_current_progress_color" format="color"/>
+        <attr name="step_view_progress_size" format="dimension"/>
+        <attr name="step_view_text_color" format="color"/>
+        <attr name="step_view_text_size" format="dimension"/>
+    </declare-styleable>
 </resources>
