@@ -99,5 +99,6 @@ public class IApplication extends Application {
                 //但前提是三方库页面的布局使用的是 dp 和 sp, 如果布局全部使用的 px, 那 AndroidAutoSize 也将无能为力
                 //经过测试 DefaultErrorActivity 的设计图宽度在 380dp - 400dp 显示效果都是比较舒服的
 //                .addExternalAdaptInfoOfActivity(DefaultErrorActivity.class, new ExternalAdaptInfo(true, 400));
+       // AutoSizeConfig.getInstance().getExternalAdaptManager().addCancelAdaptOfActivity(TargetActivity.class);
     }
 }
