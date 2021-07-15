@@ -32,4 +32,5 @@ dependencies {
     api project(path: ':centerlibrary')
     api project(path: ':lbslibrary')
     api project(path: ':materialdesignlibrary')
+    api project(path: ':networklibrary')
 }

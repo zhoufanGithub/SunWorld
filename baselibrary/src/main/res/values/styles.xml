@@ -43,5 +43,10 @@
         <item name="android:windowExitAnimation">@anim/popup_window_out</item>
     </style>
 
+    <!-- 设置图片圆形 -->
+    <style name="circleImageStyle">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 
 </resources>

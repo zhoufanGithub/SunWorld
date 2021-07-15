@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp6"
+    android:background="@drawable/comment_background">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/comment_rolling_image"
+        android:layout_width="@dimen/dp25"
+        android:layout_height="@dimen/dp25"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        app:shapeAppearanceOverlay="@style/circleImageStyle" />
+
+    <TextView
+        android:id="@+id/comment_rolling_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp6"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:layout_toRightOf="@+id/comment_rolling_image"
+        android:textColor="@color/colorFFFFFF"
+        android:textSize="12sp" />
+
+</RelativeLayout>

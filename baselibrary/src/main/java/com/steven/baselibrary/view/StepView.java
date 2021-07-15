@@ -13,37 +13,37 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.steven.baselibrary.R;
+import com.steven.baselibrary.util.DimensUtil;
 
 /**
  * author: zhoufan
  * data: 2021/7/9 16:38
  * content: 自定义View实现步数计数器的效果
- *
- *
- <com.steven.baselibrary.view.StepView
- android:id="@+id/step_view"
- android:layout_width="200dp"
- android:layout_height="200dp"
- app:step_view_fix_progress_color="@android:color/darker_gray"
- app:step_view_current_progress_color="@android:color/holo_orange_dark"
- app:step_view_progress_size="5dp"
- app:step_view_text_color="@android:color/holo_orange_light"
- app:step_view_text_size="20sp"
- app:layout_constraintEnd_toEndOf="parent"
- app:layout_constraintStart_toStartOf="parent"
- app:layout_constraintTop_toBottomOf="@+id/materialDesigner" />
-
- private fun startStep(){
- step_view.setMaxStep(4000)
- val valueAnimation = ObjectAnimator.ofInt(0,3000)
- valueAnimation.duration = 1000
- valueAnimation.addUpdateListener {
- val value:Int = it.animatedValue as Int
- step_view.setCurrentStep(value)
- }
- valueAnimation.start()
- }
- *
+ * <p>
+ * <p>
+ * <com.steven.baselibrary.view.StepView
+ * android:id="@+id/step_view"
+ * android:layout_width="200dp"
+ * android:layout_height="200dp"
+ * app:step_view_fix_progress_color="@android:color/darker_gray"
+ * app:step_view_current_progress_color="@android:color/holo_orange_dark"
+ * app:step_view_progress_size="5dp"
+ * app:step_view_text_color="@android:color/holo_orange_light"
+ * app:step_view_text_size="20sp"
+ * app:layout_constraintEnd_toEndOf="parent"
+ * app:layout_constraintStart_toStartOf="parent"
+ * app:layout_constraintTop_toBottomOf="@+id/materialDesigner" />
+ * <p>
+ * private fun startStep(){
+ * step_view.setMaxStep(4000)
+ * val valueAnimation = ObjectAnimator.ofInt(0,3000)
+ * valueAnimation.duration = 1000
+ * valueAnimation.addUpdateListener {
+ * val value:Int = it.animatedValue as Int
+ * step_view.setCurrentStep(value)
+ * }
+ * valueAnimation.start()
+ * }
  */
 public class StepView extends View {
 
@@ -54,13 +54,13 @@ public class StepView extends View {
     private int mCurrentProgressColor = Color.YELLOW;
 
     // 进度条对应的大小
-    private int mProgressSize = 5;
+    private float mProgressSize = 5;
 
     // 字体对应的颜色
     private int mTextColor = Color.YELLOW;
 
     // 字体对应的大小(像素)
-    private int mTextSize = 15;
+    private float mTextSize = 15;
 
     // 画总步数的画笔
     private Paint mFixProgressPaint;
@@ -102,9 +102,9 @@ public class StepView extends View {
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.StepView);
         mFixedProgressColor = array.getColor(R.styleable.StepView_step_view_fix_progress_color, mFixedProgressColor);
         mCurrentProgressColor = array.getColor(R.styleable.StepView_step_view_current_progress_color, mCurrentProgressColor);
-        mProgressSize = array.getDimensionPixelSize(R.styleable.StepView_step_view_progress_size, mProgressSize);
+        mProgressSize = array.getDimensionPixelSize(R.styleable.StepView_step_view_progress_size, (int) DimensUtil.dp2px(mProgressSize));
         mTextColor = array.getColor(R.styleable.StepView_step_view_text_color, mTextColor);
-        mTextSize = array.getDimensionPixelSize(R.styleable.StepView_step_view_text_size, mTextSize);
+        mTextSize = array.getDimensionPixelSize(R.styleable.StepView_step_view_text_size, (int) DimensUtil.sp2px(mTextSize));
         array.recycle();
 
         // 设置画笔
@@ -120,7 +120,14 @@ public class StepView extends View {
         mTextPaint.setColor(mTextColor);
         // 设置画笔的大小
         mTextPaint.setTextSize(mTextSize);
+    }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
+        setMeasuredDimension(Math.min(width, height), Math.min(width, height));
     }
 
     private Paint initPaint(int color) {
@@ -146,7 +153,7 @@ public class StepView extends View {
         // 1.画固定的圆弧
         RectF rectF = new RectF(mProgressSize / 2, mProgressSize / 2, getWidth() - mProgressSize / 2, getHeight() - mProgressSize / 2);
         canvas.drawArc(rectF, 135, 270, false, mFixProgressPaint);
-        // 2.画非固定圆
+        // 2.画非固定圆弧
         if (mCurrentStep < 1) {
             return;
         }
@@ -168,7 +175,10 @@ public class StepView extends View {
      *
      * @param maxStep 最大步数值
      */
-    public void setMaxStep(int maxStep) {
+    public synchronized void setMaxStep(int maxStep) {
+        if (maxStep < 0) {
+            throw new IllegalArgumentException("步数最大值不允许小于0");
+        }
         this.mMaxStep = maxStep;
     }
 
@@ -177,7 +187,13 @@ public class StepView extends View {
      *
      * @param currentStep 当前步数值
      */
-    public void setCurrentStep(int currentStep) {
+    public synchronized void setCurrentStep(int currentStep) {
+        if (currentStep < 0) {
+            throw new IllegalArgumentException("当前步数值不允许小于0");
+        }
+        if (currentStep > mMaxStep) {
+            throw new IllegalArgumentException("当前步数值不允许大于最大值");
+        }
         this.mCurrentStep = currentStep;
         invalidate();
     }
