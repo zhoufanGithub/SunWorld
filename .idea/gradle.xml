@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/centerlibrary" />
             <option value="$PROJECT_DIR$/lbslibrary" />
             <option value="$PROJECT_DIR$/materialdesignlibrary" />
-            <option value="$PROJECT_DIR$/networklibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

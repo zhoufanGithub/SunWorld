@@ -31,12 +31,12 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'androidx.appcompat:appcompat:1.3.0'
     api 'androidx.core:core-ktx:1.2.0'
     testApi 'junit:junit:4.13.2'
     androidTestApi 'androidx.test.ext:junit:1.1.1'
     androidTestApi 'androidx.test.espresso:espresso-core:3.2.0'
-    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.constraintlayout:constraintlayout:2.0.4'
     api 'com.google.android.material:material:1.2.0'
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     // 屏幕适配
@@ -45,7 +45,7 @@ dependencies {
     api 'com.android.support:recyclerview-v7:28.0.0'
     // ViewPager2
     api "androidx.viewpager2:viewpager2:1.1.0-alpha01"
-    // 网络请求框架
+    // okHttp网络请求框架
     // define a BOM and its version
     api(platform("com.squareup.okhttp3:okhttp-bom:4.9.1"))
 
@@ -53,7 +53,24 @@ dependencies {
     api("com.squareup.okhttp3:okhttp")
     api("com.squareup.okhttp3:logging-interceptor")
 
+    //retrofit网络请求框架
+    api 'com.squareup.retrofit2:retrofit:2.9.0'
+    //retrofit添加Json解析返回数据
+    api 'com.squareup.retrofit2:converter-scalars:2.9.0'
+    api 'com.squareup.retrofit2:converter-gson:2.9.0'
+    //retrofit添加RxJava支持
+    api 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+
+    api "io.reactivex.rxjava3:rxjava:3.0.13"
+    api 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
     // 图片加载框架
     api 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    // 数据库
+    api 'org.greenrobot:greendao:3.2.2' // 添加库
+
+    // 拍照以及相册选取框架
+    api 'io.github.lucksiege:pictureselector:v2.7.2'
 }

@@ -1,9 +1,7 @@
 package com.steven.baselibrary.util;
 
-import android.Manifest;
 import android.util.Log;
 
-import androidx.core.app.ActivityCompat;
 
 /**
  * author: zhoufan

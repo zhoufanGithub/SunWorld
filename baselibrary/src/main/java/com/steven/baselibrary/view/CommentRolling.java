@@ -25,46 +25,46 @@ import java.util.Map;
  * author: zhoufan
  * data: 2021/7/14 17:03
  * content:实现评论滚动的效果
- *
+ * <p>
  * 第一步：设计XML文件
- *  <RelativeLayout
- *         android:layout_width="match_parent"
- *         android:layout_height="500dp"
- *         app:layout_constraintBottom_toBottomOf="parent"
- *         app:layout_constraintEnd_toEndOf="parent"
- *         app:layout_constraintStart_toStartOf="parent">
+ * <RelativeLayout
+ * android:layout_width="match_parent"
+ * android:layout_height="500dp"
+ * app:layout_constraintBottom_toBottomOf="parent"
+ * app:layout_constraintEnd_toEndOf="parent"
+ * app:layout_constraintStart_toStartOf="parent">
+ * <p>
+ * <ScrollView
+ * android:layout_width="match_parent"
+ * android:layout_height="wrap_content"
+ * android:layout_alignParentBottom="true"
+ * android:layout_marginLeft="20dp"
+ * android:layout_marginTop="80dp"
+ * android:layout_marginRight="20dp"
+ * android:layout_marginBottom="60dp"
+ * android:overScrollMode="never"
+ * android:scrollbars="none">
+ * <p>
+ * <com.steven.baselibrary.view.CommentRolling
+ * android:id="@+id/comment_rolling_layout"
+ * android:layout_width="match_parent"
+ * android:layout_height="wrap_content" />
  *
- *         <ScrollView
- *             android:layout_width="match_parent"
- *             android:layout_height="wrap_content"
- *             android:layout_alignParentBottom="true"
- *             android:layout_marginLeft="20dp"
- *             android:layout_marginTop="80dp"
- *             android:layout_marginRight="20dp"
- *             android:layout_marginBottom="60dp"
- *             android:overScrollMode="never"
- *             android:scrollbars="none">
- *
- *             <com.steven.baselibrary.view.CommentRolling
- *                 android:id="@+id/comment_rolling_layout"
- *                 android:layout_width="match_parent"
- *                 android:layout_height="wrap_content" />
- *
- *         </ScrollView>
- *     </RelativeLayout>
- *
+ * </ScrollView>
+ * </RelativeLayout>
+ * <p>
  * 第二步：自定义View继承自LinearLayout
  * 第三步：添加数据查看效果
- *        val list = mutableListOf<MutableMap<String, Any>>().apply {
- *             for (i in 0..10) {
- *                  val map = mutableMapOf<String,Any>().apply {
- *                      put("commentImage","https://i.52112.com/icon/jpg/256/20210315/113065/4866441.jpg")
- *                      put("commentText","当前数据当前数据当前数据当前数据当前数据为$i")
- *                  }
- *                 add(map)
- *             }
- *         }
- *         comment_rolling_layout.setList(list)
+ * val list = mutableListOf<MutableMap<String, Any>>().apply {
+ * for (i in 0..10) {
+ * val map = mutableMapOf<String,Any>().apply {
+ * put("commentImage","https://i.52112.com/icon/jpg/256/20210315/113065/4866441.jpg")
+ * put("commentText","当前数据当前数据当前数据当前数据当前数据为$i")
+ * }
+ * add(map)
+ * }
+ * }
+ * comment_rolling_layout.setList(list)
  */
 public class CommentRolling extends LinearLayout {
 
@@ -104,7 +104,7 @@ public class CommentRolling extends LinearLayout {
     public void addList(Map<String, Object> map) {
         if (mCommentList != null) {
             mCommentList.add(map);
-
+            addText();
         }
     }
 
@@ -135,8 +135,11 @@ public class CommentRolling extends LinearLayout {
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
+                    if (mCurrent > 20) {
+                        removeViewAt(0);
+                    }
                     mCurrent++;
-                    if (mCurrent < mCommentList.size() - 1) {
+                    if (mCurrent < mCommentList.size()) {
                         addText();
                     }
                 }

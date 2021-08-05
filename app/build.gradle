@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -27,10 +28,17 @@ android {
     }
 }
 
+greendao {
+    schemaVersion 1 //当前数据库版本
+    // 生成数据库文件的目录
+    targetGenDir 'src/main/java'
+    // 生成的数据库相关文件的包名
+    daoPackage 'com.steven.sunworld.data'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(path: ':centerlibrary')
     api project(path: ':lbslibrary')
     api project(path: ':materialdesignlibrary')
-    api project(path: ':networklibrary')
 }

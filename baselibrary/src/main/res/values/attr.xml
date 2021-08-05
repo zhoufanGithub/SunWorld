@@ -6,22 +6,22 @@
         <attr name="banner_infinite_loop" format="boolean" />
 
         <!--RoundLinesIndicator、RectangleIndicator-->
-        <attr name="banner_indicator_height" format="dimension"/>
-        <attr name="banner_indicator_radius" format="dimension"/>
+        <attr name="banner_indicator_height" format="dimension" />
+        <attr name="banner_indicator_radius" format="dimension" />
 
         <!-- 以下为公用属性 -->
-        <attr name="banner_indicator_selected_width" format="dimension"/>
+        <attr name="banner_indicator_selected_width" format="dimension" />
         <!--CircleIndicator-->
-        <attr name="banner_indicator_normal_width" format="dimension"/>
-        <attr name="banner_indicator_space" format="dimension"/>
+        <attr name="banner_indicator_normal_width" format="dimension" />
+        <attr name="banner_indicator_space" format="dimension" />
 
-        <attr name="banner_indicator_normal_color" format="reference|color"/>
-        <attr name="banner_indicator_selected_color" format="reference|color"/>
-        <attr name="banner_indicator_margin" format="dimension"/>
-        <attr name="banner_indicator_marginLeft" format="dimension"/>
-        <attr name="banner_indicator_marginTop" format="dimension"/>
-        <attr name="banner_indicator_marginRight" format="dimension"/>
-        <attr name="banner_indicator_marginBottom" format="dimension"/>
+        <attr name="banner_indicator_normal_color" format="reference|color" />
+        <attr name="banner_indicator_selected_color" format="reference|color" />
+        <attr name="banner_indicator_margin" format="dimension" />
+        <attr name="banner_indicator_marginLeft" format="dimension" />
+        <attr name="banner_indicator_marginTop" format="dimension" />
+        <attr name="banner_indicator_marginRight" format="dimension" />
+        <attr name="banner_indicator_marginBottom" format="dimension" />
 
         <attr name="banner_indicator_gravity" format="enum">
             <enum name="left" value="0" />
@@ -34,27 +34,43 @@
             <enum name="vertical" value="1" />
         </attr>
 
-        <attr name="banner_radius" format="dimension"/>
+        <attr name="banner_radius" format="dimension" />
 
         <!--设置需要圆角的方向，不设置默认全部设置-->
-        <attr name="banner_round_top_left" format="boolean"/>
-        <attr name="banner_round_top_right" format="boolean"/>
-        <attr name="banner_round_bottom_left" format="boolean"/>
-        <attr name="banner_round_bottom_right" format="boolean"/>
+        <attr name="banner_round_top_left" format="boolean" />
+        <attr name="banner_round_top_right" format="boolean" />
+        <attr name="banner_round_bottom_left" format="boolean" />
+        <attr name="banner_round_bottom_right" format="boolean" />
 
     </declare-styleable>
 
     <declare-styleable name="DrawableIndicator">
-        <attr name="normal_drawable" format="reference"/>
-        <attr name="selected_drawable" format="reference"/>
+        <attr name="normal_drawable" format="reference" />
+        <attr name="selected_drawable" format="reference" />
     </declare-styleable>
 
     <!-- 计步器的自定义样式 -->
     <declare-styleable name="StepView">
-        <attr name="step_view_fix_progress_color" format="color"/>
-        <attr name="step_view_current_progress_color" format="color"/>
-        <attr name="step_view_progress_size" format="dimension"/>
-        <attr name="step_view_text_color" format="color"/>
-        <attr name="step_view_text_size" format="dimension"/>
+        <attr name="step_view_fix_progress_color" format="color" />
+        <attr name="step_view_current_progress_color" format="color" />
+        <attr name="step_view_progress_size" format="dimension" />
+        <attr name="step_view_text_color" format="color" />
+        <attr name="step_view_text_size" format="dimension" />
+    </declare-styleable>
+
+    <!-- 启动页的5秒等待效果 -->
+    <declare-styleable name="SplashWaitView">
+        <attr name="splash_view_background_color" format="color" />
+        <attr name="splash_view_progress_color" format="color" />
+        <attr name="splash_view_progress_size" format="dimension" />
+        <attr name="splash_view_text_size" format="dimension" />
+        <attr name="splash_view_text_color" format="color" />
+        <attr name="splash_view_wait_time" format="integer"/>
+    </declare-styleable>
+
+    <!-- 玩转字体变色效果 -->
+    <declare-styleable name="FontColorView">
+        <attr name="font_color_default_text_color" format="color" />
+        <attr name="font_color_select_text_color" format="color" />
     </declare-styleable>
 </resources>

@@ -4,70 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".data.GreenDaoActivity">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/addData"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:onClick="getCurrentLBS"
-        android:text="百度定位及地图"
+        android:text="添加数据"
+        android:onClick="addData"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/materialDesigner"
+        android:id="@+id/queryData"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:onClick="materialDesigner"
-        android:text="5.0Material Designer"
-        android:textAllCaps="false"
+        android:text="查询数据"
+        android:onClick="queryData"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/addData" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/updateData"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:onClick="netWork"
-        android:text="网络请求框架"
+        android:text="更新数据"
+        android:onClick="updateData"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialDesigner" />
+        app:layout_constraintTop_toBottomOf="@+id/queryData" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/deleteData"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="GreenDao"
-        android:onClick="greenDaoClick"
-        android:textAllCaps="false"
+        android:text="删除数据"
+        android:onClick="deleteData"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/updateData" />
 
-    <Button
-        android:id="@+id/button10"
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="0dp"
+        android:layout_marginTop="30dp"
         android:layout_height="wrap_content"
-        android:text="文件操作"
-        android:textAllCaps="false"
-        android:onClick="fileClick"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button9" />
-
-    <Button
-        android:id="@+id/button13"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="图片选择"
-        android:onClick="pictureClick"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button10" />
-
+        app:layout_constraintTop_toBottomOf="@+id/deleteData" />
 </androidx.constraintlayout.widget.ConstraintLayout>
