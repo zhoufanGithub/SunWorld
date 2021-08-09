@@ -8,9 +8,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.steven.baselibrary.datapersistence.IOFactoryUtil
 import com.steven.baselibrary.demo.FileActivity
 import com.steven.baselibrary.demo.NetWorkActivity
 import com.steven.baselibrary.demo.PictureActivity
+import com.steven.baselibrary.demo.SQLiteActivity
 import com.steven.lbslibrary.LBSActivity
 import com.steven.materialdesignlibrary.MaterialDesignerActivity
 import com.steven.sunworld.data.GreenDaoActivity
@@ -70,5 +72,9 @@ class MainActivity : AppCompatActivity() {
 
     fun pictureClick(view: View) {
         startActivity(Intent(this@MainActivity, PictureActivity::class.java))
+    }
+
+    fun sqLiteClick(view: View) {
+        startActivity(Intent(this@MainActivity, SQLiteActivity::class.java))
     }
 }

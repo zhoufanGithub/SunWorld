@@ -1,196 +1,158 @@
 package com.steven.baselibrary.datapersistence.file;
 
-import android.annotation.SuppressLint;
-import android.os.Build;
-import android.os.Environment;
-import android.os.StatFs;
-import android.util.Log;
-
 import com.steven.baselibrary.IApplication;
+import com.steven.baselibrary.R;
+import com.steven.baselibrary.datapersistence.IOFactoryUtil;
+import com.steven.baselibrary.datapersistence.IOHandler;
+import com.steven.baselibrary.util.MyToast;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
  * author: zhoufan
- * data: 2021/8/3 12:05
- * content: 所有的文件操作类
- * 内存（Memory）
- * 内部存储（InternalStorage）：不需要申请权限
- * 由系统进行维护，Context.getFileDir()：获取内置存储下的文件目录，可以用来保存不能公开给其他应用的一些敏感数据如用户个人信息
- * Context.getCacheDir()：获取内置存储下的缓存目录，可以用来保存一些缓存文件如图片，当内置存储的空间不足时将系统自动被清除
- * 绝对路径：Context.getFileDir()：/data/data/应用包名/files/
- * Context.getCacheDir()：/data/data/应用包名/cache/
- * 外部存储（ExternalStorage）：需要申请权限
- * 由于内部存储空间有限，在开发中我们一般都是操作外部存储空间。
- * Google官方建议我们App的数据应该存储在外部存储的私有目录中该App的包名下，这样当用户卸载掉App之后，相关的数据会一并删除，
- * 如果你直接在/storage/sdcard目录下创建了一个应用的文件夹，那么当你删除应用的时候，这个文件夹就不会被删除。
+ * data: 2021/8/9 10:21
+ * content: 对文件的操作进行进一步的封装
  */
-public class FileUtil {
+public class FileUtil implements IOHandler {
 
-    // 判断SD卡是否被挂载
-    private static boolean isSDCardMounted() {
-        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    // 使用单例生成唯一实例
+    private static volatile FileUtil mInstance;
+    private String mFileName;
+
+    public static FileUtil getInstance() {
+        if (mInstance == null) {
+            synchronized (IOFactoryUtil.class) {
+                if (mInstance == null) {
+                    mInstance = new FileUtil();
+                }
+            }
+        }
+        return mInstance;
     }
 
-    // 获取SDCard卡的根目录
-    public static String getSDCardBaseDir() {
-        if (isSDCardMounted()) {
-            File sdDir = null;
-            if (Build.VERSION.SDK_INT >= 29) {
-                //Android10之后
-                sdDir = IApplication.getContext().getExternalFilesDir(null);
+    private FileUtil() {
+        mFileName = "fileCache";
+    }
+
+
+    @Override
+    public IOHandler saveString(String key, String value) {
+        BufferedWriter bufferedWriter = null;
+        try {
+            boolean isResult = FileTool.createFolderAndFileItemDir(mFileName, key);
+            if (isResult) {
+                FileWriter fileWriter = new FileWriter(key);
+                bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write(value);
+                bufferedWriter.flush();
             } else {
-                sdDir = Environment.getExternalStorageDirectory();// 获取SD卡根目录
+                MyToast.showCenterSortToast(IApplication.getContext(), IApplication.getContext().getString(R.string.create_error));
             }
-            return sdDir.toString();
-        }
-        return null;
-    }
-
-    // 获取SDCard的完整空间大小，返回MB
-    public static long getSDCardSize() {
-        if (isSDCardMounted()) {
-            StatFs fs = new StatFs(getSDCardBaseDir());
-            long count = fs.getBlockCountLong();
-            long size = fs.getBlockSizeLong();
-            return count * size / 1024 / 1024;
-        }
-        return 0;
-    }
-
-    // 获取SDCard卡的剩余空间大小
-    public static long getSDCardFreeSize() {
-        if (isSDCardMounted()) {
-            StatFs fs = new StatFs(getSDCardBaseDir());
-            long count = fs.getFreeBlocksLong();
-            long size = fs.getBlockSizeLong();
-            return count * size / 1024 / 1024;
-        }
-        return 0;
-    }
-
-    // 获取SDCard卡的可用空间大小
-    public static long getSDCardAvailableSize() {
-        if (isSDCardMounted()) {
-            StatFs fs = new StatFs(getSDCardBaseDir());
-            long count = fs.getAvailableBlocksLong();
-            long size = fs.getBlockSizeLong();
-            return count * size / 1024 / 1024;
-        }
-        return 0;
-    }
-
-
-    // 在手机存储（外部存储）的根目录下面创建文件夹和文件
-    public static boolean createFolderAndFileBaseDir(String folderName, String fileName) {
-        boolean isSuccess = false;
-        if (isSDCardMounted()) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             try {
-                String path = Environment.getExternalStorageDirectory().getPath() + File.separator + folderName;
-                File file = new File(path);
-                if (!file.exists()) {
-                    // 创建文件夹
-                    file.mkdirs();
-                }
-                file = new File(path, fileName);
-                if (!file.exists()) {
-                    isSuccess = file.createNewFile();
+                if (bufferedWriter != null) {
+                    bufferedWriter.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return isSuccess;
+        return this;
     }
 
-    // 在手机存储（外部存储）的根目录下面创建文件夹
-    public static boolean createFolderBaseDir(String folderName) {
-        boolean isSuccess = false;
-        if (isSDCardMounted()) {
-            String path = Environment.getExternalStorageDirectory().getPath() + File.separator + folderName;
+    @Override
+    public IOHandler saveFloat(String key, float value) {
+        MyToast.showCenterSortToast(IApplication.getContext(), IApplication.getContext().getString(R.string.file_type_error));
+        return this;
+    }
+
+    @Override
+    public IOHandler saveInt(String key, int value) {
+        MyToast.showCenterSortToast(IApplication.getContext(), IApplication.getContext().getString(R.string.file_type_error));
+        return this;
+    }
+
+    @Override
+    public IOHandler saveBoolean(String key, boolean value) {
+        MyToast.showCenterSortToast(IApplication.getContext(), IApplication.getContext().getString(R.string.file_type_error));
+        return this;
+    }
+
+    @Override
+    public IOHandler saveLong(String key, long value) {
+        MyToast.showCenterSortToast(IApplication.getContext(), IApplication.getContext().getString(R.string.file_type_error));
+        return this;
+    }
+
+    @Override
+    public String getString(String key) {
+        BufferedReader bufferedReader = null;
+        StringBuilder builder = new StringBuilder();
+        try {
+            String path = FileTool.getItemDirPath() + key;
             File file = new File(path);
-            if (!file.exists()) {
-                // 创建文件夹
-                isSuccess = file.mkdirs();
-            }
-        }
-        return isSuccess;
-    }
-
-
-    // 在项目的根目录下面创建文件夹和文件
-    public static boolean createFolderAndFileItemDir(String folderName, String fileName) {
-        boolean isSuccess = false;
-        if (isSDCardMounted()) {
-            try {
-                String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "Android/data/" + IApplication.getContext().getPackageName() + File.separator + folderName;
-                File file = new File(path);
-                if (!file.exists()) {
-                    // 创建文件夹
-                    file.mkdirs();
+            if (file.exists()) {
+                FileReader fileReader = new FileReader(file);
+                bufferedReader = new BufferedReader(fileReader, 512);
+                String readBuff = null;
+                while ((readBuff = bufferedReader.readLine()) != null) {
+                    builder.append(readBuff);
                 }
-                file = new File(path, fileName);
-                if (!file.exists()) {
-                    isSuccess = file.createNewFile();
+            } else {
+                MyToast.showCenterSortToast(IApplication.getContext(), IApplication.getContext().getString(R.string.file_no_exists));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return isSuccess;
+        return builder.toString();
     }
 
-    // 在项目的根目录下面创建文件夹
-    public static boolean createFolderItemDir(String folderName) {
-        boolean isSuccess = false;
-        if (isSDCardMounted()) {
-            String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "Android/data/" + IApplication.getContext().getPackageName() + File.separator + folderName;
-            File file = new File(path);
-            if (!file.exists()) {
-                // 创建文件夹
-                isSuccess = file.mkdirs();
-            }
-        }
-        return isSuccess;
+    @Override
+    public float getFloat(String key, float defaultValue) {
+        MyToast.showCenterSortToast(IApplication.getContext(), IApplication.getContext().getString(R.string.file_type_error));
+        return 0;
     }
 
-    // 删除文件或文件夹
-    public static boolean deleteFile(String path) {
-        return deleteFile(new File(path));
+    @Override
+    public int getInt(String key, int defaultValue) {
+        MyToast.showCenterSortToast(IApplication.getContext(), IApplication.getContext().getString(R.string.file_type_error));
+        return 0;
     }
 
-    @SuppressLint("LongLogTag")
-    private static boolean deleteFile(File file) {
-        if (file.isDirectory()) {
-            for (String fileName : file.list()) {
-                File item = new File(file, fileName);
-                if (item.isDirectory()) {
-                    deleteFile(item);
-                } else {
-                    if (!item.delete()) {
-                        Log.d("Failed in recursively deleting a file, file's path is: ", item.getPath());
-                    }
-                }
-            }
-            if (!file.delete()) {
-                Log.d("Failed in recursively deleting a directory, directories' path is: ", file.getPath());
-            }
-        } else {
-            if (!file.delete()) {
-                Log.d("Failed in deleting this file, its path is: ", file.getPath());
-            }
-        }
-        return true;
+    @Override
+    public boolean getBoolean(String key, boolean defaultValue) {
+        MyToast.showCenterSortToast(IApplication.getContext(), IApplication.getContext().getString(R.string.file_type_error));
+        return false;
     }
 
-    // 获取手机存储（外部存储）的根目录路径
-    public static String getBaseDirPath() {
-        return Environment.getExternalStorageDirectory().getPath() + File.separator;
+    @Override
+    public long getLong(String key, long defaultValue) {
+        MyToast.showCenterSortToast(IApplication.getContext(), IApplication.getContext().getString(R.string.file_type_error));
+        return 0;
     }
 
-    // 获取项目的根目录路径
-    public static String getItemDirPath() {
-        return Environment.getExternalStorageDirectory().getPath() + File.separator + "Android/data/" + IApplication.getContext().getPackageName() + File.separator;
+    @Override
+    public void delete(String key) {
+        FileTool.deleteFile(key);
+    }
+
+    @Override
+    public void updateFileName(String fileName) {
+        this.mFileName = fileName;
     }
 }

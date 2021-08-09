@@ -18,7 +18,7 @@ public class GreenDaoController {
     private DaoSession mDaoSession;
     private Context mContext;
     private PersonInfoDao personInfoDao;
-    private static GreenDaoController mInstance;
+    private static volatile GreenDaoController mInstance;
 
     public static GreenDaoController getInstance(Context context) {
         if (mInstance == null) {

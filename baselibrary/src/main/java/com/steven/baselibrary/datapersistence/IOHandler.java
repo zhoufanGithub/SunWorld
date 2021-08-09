@@ -29,4 +29,6 @@ public interface IOHandler {
 
     void delete(String key);
 
+    void updateFileName(String fileName);
+
 }

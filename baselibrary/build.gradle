@@ -73,4 +73,7 @@ dependencies {
 
     // 拍照以及相册选取框架
     api 'io.github.lucksiege:pictureselector:v2.7.2'
+
+    // 数据持久化
+    implementation 'com.tencent:mmkv-static:1.2.10'
 }

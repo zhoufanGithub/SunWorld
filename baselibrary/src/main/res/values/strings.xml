@@ -2,4 +2,7 @@
     <string name="indicator_color_error">指示器的颜色只能设置成“@color/colorID or #000000”</string>
     <string name="banner_adapter_null_error">Adapter为空！请检查下参数</string>
     <string name="connect_error">当前网络不可用，请检查网络情况</string>
+    <string name="create_error">文件夹或者文件创建失败</string>
+    <string name="file_no_exists">文件不存在</string>
+    <string name="file_type_error">格式错误</string>
 </resources>

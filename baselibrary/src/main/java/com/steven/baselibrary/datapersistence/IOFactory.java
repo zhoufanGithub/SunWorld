@@ -7,6 +7,6 @@ package com.steven.baselibrary.datapersistence;
 
 public interface IOFactory {
 
-    IOHandler create(Class<? extends IOHandler> clazz);
+    IOHandler create(String type);
 
 }

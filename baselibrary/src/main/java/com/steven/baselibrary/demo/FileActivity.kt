@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.steven.baselibrary.R
-import com.steven.baselibrary.datapersistence.file.FileUtil
+import com.steven.baselibrary.datapersistence.file.FileTool
 import java.io.*
 
 
@@ -18,7 +18,7 @@ class FileActivity : AppCompatActivity() {
     }
 
     fun createFile(view: View) {
-        val result = FileUtil.createFolderAndFileBaseDir("zhoufan/txt", "a.txt")
+        val result = FileTool.createFolderAndFileBaseDir("zhoufan/txt", "a.txt")
         if (result) {
             Toast.makeText(this, "文件创建成功", Toast.LENGTH_LONG).show()
         } else {
@@ -27,8 +27,8 @@ class FileActivity : AppCompatActivity() {
     }
 
     fun deleteFile(view: View) {
-        val path = FileUtil.getBaseDirPath() + "zhoufan"
-        val result = FileUtil.deleteFile(path)
+        val path = FileTool.getBaseDirPath() + "zhoufan"
+        val result = FileTool.deleteFile(path)
         if (result) {
             Toast.makeText(this, "文件删除成功", Toast.LENGTH_LONG).show()
         } else {
@@ -37,7 +37,7 @@ class FileActivity : AppCompatActivity() {
     }
 
     fun writeData(view: View) {
-        val path = FileUtil.getBaseDirPath() + "zhoufan/txt/a.txt"
+        val path = FileTool.getBaseDirPath() + "zhoufan/txt/a.txt"
         val file = File(path)
         if (file.exists()) {
             val value = "12345678"
@@ -50,7 +50,7 @@ class FileActivity : AppCompatActivity() {
     }
 
     fun readData(view: View) {
-        val path = FileUtil.getBaseDirPath() + "zhoufan/txt/a.txt"
+        val path = FileTool.getBaseDirPath() + "zhoufan/txt/a.txt"
         val file = File(path)
         if (file.exists()) {
             val fileReader = FileReader(file)
