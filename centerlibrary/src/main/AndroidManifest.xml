@@ -3,7 +3,7 @@
     package="com.steven.centerlibrary">
 
     <application>
-
+        <activity android:name=".darkmode.DarkModeActivity" />
     </application>
 
 </manifest>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/head_Layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/clockBackground"
+    tools:context=".darkmode.DarkModeActivity">
+
+    <Button
+        android:id="@+id/day_mode"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp40"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp20"
+        android:background="?attr/clockButtonColor"
+        android:onClick="lightMode"
+        android:text="白天模式"
+        android:textColor="?attr/clockTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/night_mode"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp40"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp20"
+        android:background="?attr/clockButtonColor"
+        android:onClick="nightMode"
+        android:text="夜间模式"
+        android:textColor="?attr/clockTextColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/day_mode" />
+</androidx.constraintlayout.widget.ConstraintLayout>

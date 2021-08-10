@@ -92,4 +92,5 @@ public class DaoMaster extends AbstractDaoMaster {
             onCreate(db);
         }
     }
+
 }

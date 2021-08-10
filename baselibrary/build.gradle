@@ -72,7 +72,7 @@ dependencies {
     api 'org.greenrobot:greendao:3.2.2' // 添加库
 
     // 拍照以及相册选取框架
-    api 'io.github.lucksiege:pictureselector:v2.7.2'
+    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.6.0'
 
     // 数据持久化
     implementation 'com.tencent:mmkv-static:1.2.10'
